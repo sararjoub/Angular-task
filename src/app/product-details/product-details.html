@@ -1,0 +1,34 @@
+<div class="product-card">
+
+  <h2>Product Details</h2>
+
+  <h3>{{ productName }}</h3>
+
+  <p class="description">{{ description }}</p>
+
+  <p class="price">${{ price }}</p>
+
+  <p class="status" [class.unavailable]="!isAvailable">
+    ● {{ isAvailable ? 'Available' : 'Unavailable' }}
+  </p>
+
+  <div class="quantity-control">
+
+    <button (click)="decreaseQuantity()"
+            [disabled]="quantity() === 1">
+      −
+    </button>
+
+    <span>{{ quantity() }}</span>
+
+    <button (click)="increaseQuantity()">+</button>
+
+  </div>
+
+  <button class="add-btn"
+          (click)="addToCart()"
+          [disabled]="!isAvailable">
+    Add to Cart
+  </button>
+
+</div>
