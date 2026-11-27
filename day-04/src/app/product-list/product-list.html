@@ -1,0 +1,154 @@
+
+<h1>ElectroShop</h1>
+<p>Explore our latest products</p>
+
+<div class="order-section">
+
+  <h2>Order Status</h2>
+
+  <p class="status-label">{{ orderStatus }}</p>
+
+  @switch (orderStatus) {
+
+    @case ('Pending') {
+      <p class="status-pending">
+        Your order is waiting for confirmation.
+      </p>
+    }
+
+    @case ('Processing') {
+      <p class="status-processing">
+        Your order is being prepared.
+      </p>
+    }
+
+    @case ('Shipped') {
+      <p class="status-shipped">
+        Your order has been shipped.
+      </p>
+    }
+
+    @case ('Delivered') {
+      <p class="status-delivered">
+        Your order has been delivered.
+      </p>
+    }
+
+    @default {
+      <p class="status-unknown">
+        Unknown Order Status.
+      </p>
+    }
+
+  }
+
+</div>
+
+<div class="categories-section">
+
+  <h2>Product Categories</h2>
+
+ 
+<div class="categories-list">
+
+  <button
+    (click)="selectedCategory = 'All Products'"
+    [class.active]="selectedCategory === 'All Products'">
+    All Products
+  </button>
+
+  <button
+    (click)="selectedCategory = 'Electronics'"
+    [class.active]="selectedCategory === 'Electronics'">
+    Electronics
+  </button>
+
+  <button
+    (click)="selectedCategory = 'Accessories'"
+    [class.active]="selectedCategory === 'Accessories'">
+    Accessories
+  </button>
+
+</div>
+
+
+  @if (selectedCategory === 'All Products') {
+    <p class="category-message">
+      You are viewing all products.
+    </p>
+  } @else if (selectedCategory === 'Electronics') {
+    <p class="category-message">
+      You are viewing electronics products.
+    </p>
+  } @else if (selectedCategory === 'Accessories') {
+    <p class="category-message">
+      You are viewing accessories products.
+    </p>
+  } @else {
+    <p class="category-message">
+      Unknown Category.
+    </p>
+  }
+
+</div>
+
+
+<div class="products-container">
+
+  @for (product of products; track product.id) {
+
+ <div class="product-card"
+  [ngClass]="{
+    'discount-card': product.discount > 0,
+    'available-card': product.isAvailable,
+    'unavailable-card': !product.isAvailable,
+    'premium-card': product.price > 500
+  }"
+  [ngStyle]="{
+    'opacity': product.isAvailable ? 1 : 0.6
+  }">
+     <img
+  [src]="product.image"
+  [alt]="product.name"
+  class="product-image">
+      <h2>{{ product.name }}</h2>
+
+      <p>Category: {{ product.category }}</p>
+
+      <p class="price"
+  [ngStyle]="{
+    'color': product.discount > 0 ? 'red' : 'black',
+    'font-size': product.price > 500 ? '28px' : '20px'
+  }">
+
+  {{ product.price }} JD
+
+</p>
+
+      @if (product.isAvailable) {
+        <span class="available">Available</span>
+      } @else {
+        <span class="unavailable">Out of Stock</span>
+      }
+
+      @if (product.discount > 0) {
+        <p class="offer">
+          Special Offer - {{ product.discount }}% OFF
+        </p>
+      } @else {
+        <p class="no-discount">No Discount</p>
+      }
+
+      @if (product.price > 500) {
+        <p class="premium">★ Premium Product</p>
+      }
+
+      @if (product.isAvailable) {
+        <button class="buy-btn">Buy Now</button>
+      }
+
+    </div>
+
+  }
+
+</div>
