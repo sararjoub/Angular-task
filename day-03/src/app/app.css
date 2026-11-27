@@ -1,0 +1,51 @@
+h1 {
+  text-align: center;
+  font-family: Arial;
+}
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.card {
+  width: 250px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  position: relative;
+  font-family: Arial;
+}
+
+.card img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+  margin-top: 30px;
+}
+
+.in-stock,
+.out-of-stock {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  padding: 6px 12px;
+  border-radius: 5px;
+  color: white;
+}
+
+.in-stock {
+  background-color: green;
+}
+
+.out-of-stock {
+  background-color: red;
+}
+
+.price {
+  color: #b77932;
+  font-size: 22px;
+  font-weight: bold;
+}
